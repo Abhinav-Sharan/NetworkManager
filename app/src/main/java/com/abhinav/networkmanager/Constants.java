@@ -12,5 +12,6 @@ public final class Constants {
     public static final String awayWifiKey = "awayWifiKey";
     public static final String awayDataKey = "awayDataKey";
     public static final String shouldServiceStartOnBoot = "shouldServiceStartOnBoot";
+    public static final String shouldSetWiFiWhenAway = "shouldSetWiFiWhenAway";
 
 }

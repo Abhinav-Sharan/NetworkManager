@@ -143,13 +143,14 @@ public class AndroidServiceStartOnBoot extends Service implements
     @Override
     public void onLocationChanged(Location location) {
         mCurrentLocation = location;
-        boolean isHome = mSettingLocation.distanceTo(mCurrentLocation) < 20;
+        boolean isHome = mSettingLocation.distanceTo(mCurrentLocation) < 28;
         if(isHome){
             locationType = LocationType.HOME;
             setWifi(homeWifi);
             setData(homeData);
         }
-        else {
+        if(sharedPreferences.contains(Constants.shouldSetWiFiWhenAway) && sharedPreferences.getBoolean(Constants.shouldSetWiFiWhenAway,false))
+        {
             locationType = LocationType.AWAY;
             setWifi(awayWifi);
             setData(awayData);

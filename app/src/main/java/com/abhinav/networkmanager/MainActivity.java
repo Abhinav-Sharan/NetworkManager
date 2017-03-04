@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -74,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements
             editor.putBoolean(Constants.shouldServiceStartOnBoot, true);
             editor.commit();
             startService(intent);
-            Toast.makeText(getApplicationContext(),"Service started",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Service started",Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
 
     }
@@ -88,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements
             editor.putBoolean(Constants.shouldServiceStartOnBoot, false);
             editor.commit();
             stopService(intent);
-            Toast.makeText(getApplicationContext(),"Service stopped",Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Service stopped",Toast.LENGTH_LONG).show();
         }
         catch (Exception e){
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
 
     }
@@ -104,6 +105,18 @@ public class MainActivity extends AppCompatActivity implements
         updateUIFromPreference();
     }
 
+    public void onCheckChanged(View view){
+        try {
+            CheckBox checkBox = (CheckBox) findViewById(R.id.checkbox);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putBoolean(Constants.shouldServiceStartOnBoot, checkBox.isChecked());
+            editor.commit();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
+    }
 
     public void setCurrentSetting(View view){
         Switch switchHomeWifi = (Switch) findViewById(R.id.switch1);
