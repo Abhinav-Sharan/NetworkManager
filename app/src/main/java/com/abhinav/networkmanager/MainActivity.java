@@ -201,6 +201,18 @@ public class MainActivity extends AppCompatActivity implements
                     ", Longitude = " +
                     location.getLongitude(), illegalArgumentException);
         }
+        catch (Exception e) {
+            // Catch invalid latitude or longitude values.
+            errorMessage = "I dont know what went wrong";
+            Log.e(TAG, errorMessage + ". " +
+                    "Latitude = " + location.getLatitude() +
+                    ", Longitude = " +
+                    location.getLongitude(), e);
+            stringBuilder.append("Something went wrong");
+            return stringBuilder.toString();
+
+        }
+
 
         if(addresses == null || addresses.toArray().length < 1) {
             stringBuilder.append("Your current location is not set");

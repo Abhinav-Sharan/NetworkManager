@@ -4,7 +4,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.abhinav.networkmanager"
+        applicationId "com.abhinav.com.abhinav.networkmanager"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
