@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements
         catch (Exception e){
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
-
     }
 
     public void setCurrentSetting(View view){
@@ -173,7 +172,6 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLocationChanged(Location location) {
             mLastLocation  = location;
-            updateUIFromPreference();
             updateUI();
     }
 
@@ -191,7 +189,10 @@ public class MainActivity extends AppCompatActivity implements
         List<android.location.Address> addresses = null;
         String errorMessage = "";
         StringBuilder stringBuilder = new StringBuilder();
-
+        if(location == null){
+            stringBuilder.append("No location.PLease check the internet connection");
+            return stringBuilder.toString();
+        }
         try {
             addresses = geocoder.getFromLocation(
                     location.getLatitude(),
@@ -223,14 +224,10 @@ public class MainActivity extends AppCompatActivity implements
                     location.getLongitude(), e);
             stringBuilder.append("Something went wrong");
             return stringBuilder.toString();
-
         }
-
-
         if(addresses == null || addresses.toArray().length < 1) {
             stringBuilder.append("Your current location is not set");
             return stringBuilder.toString();
-
         }
         for (int i=0;i<addresses.get(0).getMaxAddressLineIndex();i++ ){
             stringBuilder.append(addresses.get(0).getAddressLine(i));
@@ -240,7 +237,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private void updateUI(){
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText("Your last location is : "+ getAddress(mLastLocation));
+        textView.setText("Your current location is : "+ getAddress(mLastLocation));
     }
     private void updateUIFromPreference(){
         if(!sharedpreferences.contains(Constants.LocationKey)) return;;
