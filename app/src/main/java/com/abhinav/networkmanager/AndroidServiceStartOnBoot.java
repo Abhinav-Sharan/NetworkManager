@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -108,7 +109,7 @@ public class AndroidServiceStartOnBoot extends Service implements
     public int onStartCommand(Intent intent,int flags,int startId){
         updateDataFromPreference();
         mGoogleApiClient.connect();
-        return START_NOT_STICKY;
+        return START_STICKY;
     }
 
     @Override
